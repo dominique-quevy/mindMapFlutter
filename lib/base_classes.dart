@@ -6,10 +6,17 @@ class Node {
   // pour pouvoir fournir un nodeParent par défaut
   // avant l'instanciation d'un nouveau Node
   static Node emptyNode = Node('-');
+  Node nodeParent = emptyNode;
+
   // valeur du Node courant qui est enfant du Node nodeParent.
   // lors de sa construction, le Node est son propre parent Node nodeParent
   String text = "";
-  Node nodeParent = emptyNode;
+
+  // créer un Node avec la valeur nodeText
+  Node(String nodeText) {
+    text = nodeText;
+    nodeParent = this;
+  } // Node constructor
 
   // liste privée de tous les Node enfants
   // By adding the private field _children (initialized within the class constructor) and using a getter,
@@ -18,14 +25,9 @@ class Node {
   // This will prevent the linter warning from being displayed.
   // "Node child: Non-nullable instance field 'children' must be initialized."
   final List<Node> _children = []; // Private field - non nullable intitialised
+
   // obtenir la liste privée des Node enfants
   List<Node> get children => _children; // Getter for private field
-
-  // créer un Node avec la valeur nodeText
-  Node(String nodeText) {
-    text = nodeText;
-    nodeParent = this;
-  }
 
   // ajouter un Node enfant dans la liste des Node enfants du Node courant qui est dès lors le nodeParent
   // pour contrôle, renvoit de la référence du Node nodeParent qui est celui qui a demandé l'ajout de l'enfant
@@ -35,8 +37,9 @@ class Node {
     _children.add(child);
     nodeParent = this;
     return (nodeParent);
-  }
-}
+  } // addChild
+
+} // Node
 /*
 // class MindMap ----- ----- ----- ----- ----- //
 
